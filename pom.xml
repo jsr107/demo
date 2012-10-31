@@ -29,9 +29,9 @@
         </dependency>
 
         <dependency>
-            <groupId>javax.cache.implementation</groupId>
+            <groupId>org.jsr107.ri</groupId>
             <artifactId>cache-ri-impl</artifactId>
-            <version>0.5</version>
+            <version>0.6-SNAPSHOT</version>
         </dependency>
 
         <!--<dependency>-->
