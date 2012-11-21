@@ -1,5 +1,6 @@
 package javax.cache;
 
+import org.jsr107.ri.SimpleCacheConfigurationBuilder;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
@@ -16,8 +17,11 @@ public class CacheTest {
     public void simpleAPI() {
         String cacheName = "sampleCache";
         CacheManager cacheManager = Caching.getCacheManager();
-        Cache<String, Integer> cache = cacheManager.getCache(cacheName);
-        cache = cacheManager.<String, Integer>createCacheBuilder(cacheName).setStoreByValue(false).build();
+        
+        SimpleCacheConfigurationBuilder<String, Integer> builder = new SimpleCacheConfigurationBuilder<String, Integer>();
+        builder.setStoreByValue(false);
+        
+        Cache<String, Integer> cache = cacheManager.configureCache(cacheName, builder.build());
 
         String key = "key";
         Integer value1 = 1;
