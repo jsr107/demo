@@ -23,8 +23,8 @@ public class CacheTest {
         SimpleCacheConfigurationBuilder<String, Integer> builder = new SimpleCacheConfigurationBuilder<String, Integer>();
         builder.setStoreByValue(false)
                 .setStatisticsEnabled(true)
-                .setExpiry(CacheConfiguration.ExpiryType.ACCESSED, new CacheConfiguration.Duration(TimeUnit.HOURS, 1));
-        CacheConfiguration cacheConfiguration = builder.build();
+                .setCacheEntryExpiryPolicy(new CacheEntryExpiryPolicy.Accessed<String, Integer>(new CacheConfiguration.Duration(TimeUnit.HOURS, 1)));
+        CacheConfiguration<String, Integer> cacheConfiguration = builder.build();
         
         Cache<String, Integer> cache = cacheManager.configureCache(cacheName, cacheConfiguration);
 
