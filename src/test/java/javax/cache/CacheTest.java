@@ -17,9 +17,9 @@ public class CacheTest {
         String cacheName = "sampleCache";
         CacheManager cacheManager = Caching.getCacheManager();
 
-        SimpleCacheConfiguration<String, Integer> config = new SimpleCacheConfiguration<String, Integer>();
+        SimpleConfiguration<String, Integer> config = new SimpleConfiguration<String, Integer>();
         config.setStoreByValue(false)
-              .setCacheEntryExpiryPolicy(new CacheEntryExpiryPolicy.Accessed<String, Integer>(new CacheConfiguration.Duration(TimeUnit.HOURS, 1)))
+              .setExpiryPolicy(new ExpiryPolicy.Accessed<String, Integer>(new Configuration.Duration(TimeUnit.HOURS, 1)))
               .setStatisticsEnabled(true);
         
         Cache<String, Integer> cache = cacheManager.configureCache(cacheName, config);
