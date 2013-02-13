@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>javax.cache</groupId>
     <artifactId>jsr107demo</artifactId>
-    <version>0.7-SNAPSHOT</version>
+    <version>0.61</version>
     <packaging>jar</packaging>
 
     <name>jsr107demo</name>
@@ -25,13 +25,13 @@
         <dependency>
             <groupId>javax.cache</groupId>
             <artifactId>cache-api</artifactId>
-            <version>0.7-SNAPSHOT</version>
+            <version>0.61</version>
         </dependency>
 
         <dependency>
             <groupId>org.jsr107.ri</groupId>
             <artifactId>cache-ri-impl</artifactId>
-            <version>0.7-SNAPSHOT</version>
+            <version>0.61</version>
         </dependency>
 
         <!--<dependency>-->
