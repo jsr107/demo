@@ -19,7 +19,7 @@ public class CacheTest {
 
         MutableConfiguration<String, Integer> config = new MutableConfiguration<String, Integer>();
         config.setStoreByValue(false)
-              .setExpiryPolicy(new ExpiryPolicy.Accessed<String, Integer>(new Configuration.Duration(TimeUnit.HOURS, 1)))
+              .setExpiryPolicyFactory(Factories.of(new ExpiryPolicy.Accessed<String, Integer>(new Configuration.Duration(TimeUnit.HOURS, 1))))
               .setStatisticsEnabled(true);
         
         Cache<String, Integer> cache = cacheManager.configureCache(cacheName, config);
