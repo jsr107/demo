@@ -2,6 +2,7 @@ package javax.cache;
 
 import org.junit.Test;
 
+import javax.cache.spi.CachingProvider;
 import java.util.concurrent.TimeUnit;
 
 import static junit.framework.Assert.assertEquals;
@@ -15,7 +16,8 @@ public class CacheTest {
     @Test
     public void simpleAPI() {
         String cacheName = "sampleCache";
-        CacheManager cacheManager = Caching.getCacheManager();
+        CachingProvider cachingProvider = Caching.getCachingProvider();
+        CacheManager cacheManager = cachingProvider.getCacheManager();
 
         MutableConfiguration<String, Integer> config = new MutableConfiguration<String, Integer>();
         config.setStoreByValue(false)
