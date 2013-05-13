@@ -5,8 +5,9 @@ import org.junit.Test;
 import javax.cache.spi.CachingProvider;
 import java.util.concurrent.TimeUnit;
 
-import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
+import static org.junit.Assert.assertEquals;
+
 
 /**
  * @author Greg Luck
