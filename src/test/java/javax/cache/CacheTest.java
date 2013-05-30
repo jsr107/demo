@@ -2,6 +2,8 @@ package javax.cache;
 
 import org.junit.Test;
 
+import javax.cache.expiry.Accessed;
+import javax.cache.expiry.Duration;
 import javax.cache.spi.CachingProvider;
 import java.util.concurrent.TimeUnit;
 
@@ -22,7 +24,7 @@ public class CacheTest {
 
         MutableConfiguration<String, Integer> config = new MutableConfiguration<String, Integer>(String.class, Integer.class);
         config.setStoreByValue(false)
-              .setExpiryPolicyFactory(Factories.of(new ExpiryPolicy.Accessed<String, Integer>(new Configuration.Duration(TimeUnit.HOURS, 1))))
+              .setExpiryPolicyFactory(Factories.of(new Accessed<String, Integer>(new Duration(TimeUnit.HOURS, 1))))
               .setStatisticsEnabled(true);
         
         Cache<String, Integer> cache = cacheManager.configureCache(cacheName, config);
