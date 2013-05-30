@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author Greg Luck
  */
-public class CacheTest {
+public class CacheDemos {
 
   @Test
   public void simpleAPI() {
