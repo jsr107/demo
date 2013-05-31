@@ -24,8 +24,9 @@ public class CacheDemos {
     CachingProvider cachingProvider = Caching.getCachingProvider();
     CacheManager cacheManager = cachingProvider.getCacheManager();
 
-    MutableConfiguration<String, Integer> config = new MutableConfiguration<String, Integer>(String.class, Integer.class);
+    MutableConfiguration<String, Integer> config = new MutableConfiguration<String, Integer>();
     config.setStoreByValue(false)
+        .setTypes(String.class, Integer.class)
         .setExpiryPolicyFactory(Factories.of(new Accessed<String, Integer>(new Duration(TimeUnit.HOURS, 1))))
         .setStatisticsEnabled(true);
 
