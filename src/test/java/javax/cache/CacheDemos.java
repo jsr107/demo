@@ -2,12 +2,9 @@ package javax.cache;
 
 import org.junit.Test;
 
-import javax.cache.configuration.FactoryBuilder;
 import javax.cache.configuration.MutableConfiguration;
-import javax.cache.expiry.Accessed;
-import javax.cache.expiry.Duration;
+import javax.cache.expiry.AccessedExpiryPolicy;
 import javax.cache.spi.CachingProvider;
-import java.util.concurrent.TimeUnit;
 
 import static javax.cache.configuration.FactoryBuilder.factoryOf;
 import static javax.cache.expiry.Duration.ONE_HOUR;
@@ -30,7 +27,7 @@ public class CacheDemos {
     MutableConfiguration<String, Integer> config = new MutableConfiguration<String, Integer>();
     config.setStoreByValue(false)
         .setTypes(String.class, Integer.class)
-        .setExpiryPolicyFactory(factoryOf(new Accessed<String, Integer>(ONE_HOUR)))
+        .setExpiryPolicyFactory(factoryOf(new AccessedExpiryPolicy<String, Integer>(ONE_HOUR)))
         .setStatisticsEnabled(true);
 
     Cache<String, Integer> cache = cacheManager.configureCache(cacheName, config);
@@ -53,7 +50,7 @@ public class CacheDemos {
     MutableConfiguration config = new MutableConfiguration<String, Integer>()
         .setTypes(String.class, Integer.class);
     config.setStoreByValue(false)
-        .setExpiryPolicyFactory(factoryOf(new Accessed<String,
+        .setExpiryPolicyFactory(factoryOf(new AccessedExpiryPolicy<String,
             Integer>(ONE_HOUR))).setStatisticsEnabled(true);
 
     Cache cache = cacheManager.configureCache(cacheName, config);

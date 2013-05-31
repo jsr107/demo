@@ -3,9 +3,11 @@ package javax.cache;
 import javax.cache.expiry.Duration;
 import javax.cache.expiry.ExpiryPolicy;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static javax.cache.Cache.Entry;
+import static javax.cache.expiry.Duration.ONE_HOUR;
+import static javax.cache.expiry.Duration.TWENTY_MINUTES;
+import static javax.cache.expiry.Duration.ZERO;
 
 /**
  * Expiry examples
@@ -18,7 +20,7 @@ public class Expiry {
     @Override
     public Duration getExpiryForCreatedEntry(Entry<? extends String, ? extends
         ShoppingCart> entry) {
-      return new Duration(TimeUnit.MINUTES, 20);
+      return TWENTY_MINUTES;
     }
 
     @Override
@@ -36,7 +38,7 @@ public class Expiry {
       //when a shopping cart is closed, we can expire it immediately,
       //otherwise we give shopping cart another 20 minutes. To cause this
       //to take immediate effect the cart must be put back in the cache.
-      return c.isClosed() ? Duration.ZERO : new Duration(TimeUnit.HOURS, 1);
+      return c.isClosed() ? ZERO : ONE_HOUR;
     }
   }
 
