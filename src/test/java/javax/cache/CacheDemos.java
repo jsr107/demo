@@ -20,7 +20,6 @@ public class CacheDemos {
 
   @Test
   public void simpleAPI() {
-    String cacheName = "sampleCache";
     CachingProvider cachingProvider = Caching.getCachingProvider();
     CacheManager cacheManager = cachingProvider.getCacheManager();
 
@@ -30,7 +29,8 @@ public class CacheDemos {
         .setExpiryPolicyFactory(factoryOf(new AccessedExpiryPolicy<String, Integer>(ONE_HOUR)))
         .setStatisticsEnabled(true);
 
-    Cache<String, Integer> cache = cacheManager.configureCache(cacheName, config);
+    cacheManager.configureCache("simpleCache", config);
+    Cache<String, Integer> cache = cacheManager.getCache("simpleCache");
     String key = "key";
     Integer value1 = 1;
     cache.put("key", value1);
