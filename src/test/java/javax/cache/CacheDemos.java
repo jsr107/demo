@@ -9,6 +9,7 @@ import javax.cache.expiry.Duration;
 import javax.cache.spi.CachingProvider;
 import java.util.concurrent.TimeUnit;
 
+import static javax.cache.configuration.FactoryBuilder.factoryOf;
 import static junit.framework.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
 
@@ -28,7 +29,7 @@ public class CacheDemos {
     MutableConfiguration<String, Integer> config = new MutableConfiguration<String, Integer>();
     config.setStoreByValue(false)
         .setTypes(String.class, Integer.class)
-        .setExpiryPolicyFactory(FactoryBuilder.factoryOf(new Accessed<String, Integer>(new Duration(TimeUnit.HOURS, 1))))
+        .setExpiryPolicyFactory(factoryOf(new Accessed<String, Integer>(new Duration(TimeUnit.HOURS, 1))))
         .setStatisticsEnabled(true);
 
     Cache<String, Integer> cache = cacheManager.configureCache(cacheName, config);
@@ -51,7 +52,7 @@ public class CacheDemos {
     MutableConfiguration config = new MutableConfiguration<String, Integer>()
         .setTypes(String.class, Integer.class);
     config.setStoreByValue(false)
-        .setExpiryPolicyFactory(FactoryBuilder.factoryOf(new Accessed<String, Integer>(new Duration(TimeUnit.HOURS, 1))))
+        .setExpiryPolicyFactory(factoryOf(new Accessed<String, Integer>(new Duration(TimeUnit.HOURS, 1))))
         .setStatisticsEnabled(true);
 
     Cache cache = cacheManager.configureCache(cacheName, config);
