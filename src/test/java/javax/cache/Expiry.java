@@ -5,7 +5,6 @@ import javax.cache.expiry.ExpiryPolicy;
 import java.util.List;
 
 import static javax.cache.Cache.Entry;
-import static javax.cache.expiry.Duration.ONE_HOUR;
 import static javax.cache.expiry.Duration.TWENTY_MINUTES;
 import static javax.cache.expiry.Duration.ZERO;
 
@@ -38,7 +37,7 @@ public class Expiry {
       //when a shopping cart is closed, we can expire it immediately,
       //otherwise we give shopping cart another 20 minutes. To cause this
       //to take immediate effect the cart must be put back in the cache.
-      return c.isClosed() ? ZERO : ONE_HOUR;
+      return c.isClosed() ? ZERO : TWENTY_MINUTES;
     }
   }
 
