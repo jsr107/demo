@@ -30,7 +30,8 @@ public class CacheDemos {
         .setStatisticsEnabled(true);
 
     cacheManager.configureCache("simpleCache", config);
-    Cache<String, Integer> cache = cacheManager.getCache("simpleCache");
+    Cache<String, Integer> cache = cacheManager.getCache("simpleCache",
+        String.class, Integer.class);
     String key = "key";
     Integer value1 = 1;
     cache.put("key", value1);
