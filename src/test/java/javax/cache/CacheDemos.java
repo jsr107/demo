@@ -26,7 +26,7 @@ public class CacheDemos {
     MutableConfiguration<String, Integer> config = new MutableConfiguration<String, Integer>();
     config.setStoreByValue(false)
         .setTypes(String.class, Integer.class)
-        .setExpiryPolicyFactory(factoryOf(new AccessedExpiryPolicy<String, Integer>(ONE_HOUR)))
+        .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
         .setStatisticsEnabled(true);
 
     cacheManager.configureCache("simpleCache", config);
@@ -50,8 +50,8 @@ public class CacheDemos {
     MutableConfiguration config = new MutableConfiguration<String, Integer>()
         .setTypes(String.class, Integer.class);
     config.setStoreByValue(false)
-        .setExpiryPolicyFactory(factoryOf(new AccessedExpiryPolicy<String,
-            Integer>(ONE_HOUR))).setStatisticsEnabled(true);
+        .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
+    .setStatisticsEnabled(true);
 
     Cache cache = cacheManager.configureCache(cacheName, config);
     String key = "key";
