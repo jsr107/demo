@@ -1,7 +1,7 @@
 package javax.cache;
 
 import javax.cache.configuration.MutableConfiguration;
-import javax.cache.event.CompletionListenerFuture;
+import javax.cache.integration.CompletionListenerFuture;
 import javax.cache.expiry.AccessedExpiryPolicy;
 import javax.cache.spi.CachingProvider;
 
