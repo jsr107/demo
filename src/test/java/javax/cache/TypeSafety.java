@@ -1,13 +1,8 @@
 package javax.cache;
 
-import org.junit.Test;
-
 import javax.cache.configuration.MutableConfiguration;
-import javax.cache.expiry.AccessedExpiryPolicy;
 import javax.cache.spi.CachingProvider;
 
-import static javax.cache.configuration.FactoryBuilder.factoryOf;
-import static javax.cache.expiry.Duration.ONE_HOUR;
 import static junit.framework.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
 
