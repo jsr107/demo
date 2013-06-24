@@ -32,7 +32,7 @@ public class EntryProcessorExamples {
     String key = "counter";
     cache.put(key, 1);
 
-    int previous = cache.invokeEntryProcessor(key, new IncrementProcessor<String>());
+    int previous = cache.invoke(key, new IncrementProcessor<String>());
 
     assert previous == 1;
     assert cache.get(key) == 2;
