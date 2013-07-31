@@ -27,7 +27,7 @@ public class EntryProcessorExamples {
       new MutableConfiguration<String, Integer>()
         .setTypes(String.class, Integer.class);
 
-    Cache<String, Integer> cache = manager.configureCache("example", configuration);
+    Cache<String, Integer> cache = manager.getOrCreateCache("example", configuration);
 
     String key = "counter";
     cache.put(key, 1);

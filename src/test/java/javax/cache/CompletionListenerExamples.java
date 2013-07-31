@@ -28,7 +28,7 @@ public class CompletionListenerExamples {
         .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
         .setStatisticsEnabled(true);
 
-    cacheManager.configureCache("simpleCache", config);
+    cacheManager.getOrCreateCache("simpleCache", config);
     Cache<String, Integer> cache = cacheManager.getCache("simpleCache",
         String.class, Integer.class);
 

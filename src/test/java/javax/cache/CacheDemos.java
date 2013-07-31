@@ -28,7 +28,7 @@ public class CacheDemos {
         .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
         .setStatisticsEnabled(true);
 
-    cacheManager.configureCache("simpleCache", config);
+    cacheManager.getOrCreateCache("simpleCache", config);
     Cache<String, Integer> cache = cacheManager.getCache("simpleCache",
         String.class, Integer.class);
     String key = "key";
@@ -53,7 +53,7 @@ public class CacheDemos {
         .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
     .setStatisticsEnabled(true);
 
-    Cache cache = cacheManager.configureCache(cacheName, config);
+    Cache cache = cacheManager.getOrCreateCache(cacheName, config);
     String key = "key";
     Integer value1 = 1;
     cache.put("key", value1);

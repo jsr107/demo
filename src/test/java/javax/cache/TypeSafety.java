@@ -18,7 +18,7 @@ public class TypeSafety {
     MutableConfiguration<String, Integer> config = new
         MutableConfiguration<String, Integer>();
     config.setTypes(String.class, Integer.class);
-    cacheManager.configureCache("simpleCache", config);
+    cacheManager.getOrCreateCache("simpleCache", config);
     Cache<String, Integer> simpleCache = cacheManager.getCache("simpleCache",
         String.class, Integer.class);
 
