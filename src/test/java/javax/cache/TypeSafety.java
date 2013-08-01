@@ -3,9 +3,6 @@ package javax.cache;
 import javax.cache.configuration.MutableConfiguration;
 import javax.cache.spi.CachingProvider;
 
-import static junit.framework.Assert.assertNull;
-import static org.junit.Assert.assertEquals;
-
 /**
  * @author Greg Luck
  */

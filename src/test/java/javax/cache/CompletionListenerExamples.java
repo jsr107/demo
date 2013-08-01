@@ -1,10 +1,9 @@
 package javax.cache;
 
 import javax.cache.configuration.MutableConfiguration;
-import javax.cache.integration.CompletionListenerFuture;
 import javax.cache.expiry.AccessedExpiryPolicy;
+import javax.cache.integration.CompletionListenerFuture;
 import javax.cache.spi.CachingProvider;
-
 import java.util.HashSet;
 import java.util.concurrent.ExecutionException;
 
