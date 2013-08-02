@@ -19,18 +19,26 @@ public class CacheDemos {
 
   @Test
   public void simpleAPITypeEnforcement() {
+
+    //resolve a cache manager
     CachingProvider cachingProvider = Caching.getCachingProvider();
     CacheManager cacheManager = cachingProvider.getCacheManager();
 
+    //configure the cache
     MutableConfiguration<String, Integer> config = new MutableConfiguration<String, Integer>();
     config.setStoreByValue(false)
         .setTypes(String.class, Integer.class)
         .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
         .setStatisticsEnabled(true);
 
-    cacheManager.getOrCreateCache("simpleCache", config);
-    Cache<String, Integer> cache = cacheManager.getCache("simpleCache",
+    //create the cache
+    cacheManager.createCache("simpleCache", config);
+
+    //get the cache
+    Cache<String, Integer> cache = Caching.getCache("simpleCache",
         String.class, Integer.class);
+
+    //use the cache
     String key = "key";
     Integer value1 = 1;
     cache.put("key", value1);
@@ -63,7 +71,7 @@ public class CacheDemos {
     Cache<String, Integer> cache = Caching.getCache("simpleCache2",
         String.class, Integer.class);
 
-    //cache operations
+    //use the cache
     String key = "key";
     Integer value1 = 1;
     cache.put("key", value1);
@@ -75,17 +83,25 @@ public class CacheDemos {
 
   @Test
   public void simpleAPINoTypeEnforcement() {
-    String cacheName = "sampleCache";
+
+    //resolve a cache manager
     CachingProvider cachingProvider = Caching.getCachingProvider();
     CacheManager cacheManager = cachingProvider.getCacheManager();
 
-    MutableConfiguration config = new MutableConfiguration<String, Integer>()
-        .setTypes(String.class, Integer.class);
+    //configure the cache
+    String cacheName = "sampleCache";
+    MutableConfiguration config = new MutableConfiguration<String, Integer>();
     config.setStoreByValue(false)
         .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
     .setStatisticsEnabled(true);
 
-    Cache cache = cacheManager.getOrCreateCache(cacheName, config);
+    //create the cache
+    cacheManager.createCache(cacheName, config);
+
+    //get the cache
+    Cache cache = cacheManager.getCache(cacheName);
+
+    //use the cache
     String key = "key";
     Integer value1 = 1;
     cache.put("key", value1);
