@@ -82,7 +82,40 @@ public class CacheDemos {
   }
 
   @Test
-  public void simpleAPINoTypeEnforcement() {
+  public void simpleAPIWithGenericsAndNoTypeEnforcement() {
+
+    //resolve a cache manager
+    CachingProvider cachingProvider = Caching.getCachingProvider();
+    CacheManager cacheManager = cachingProvider.getCacheManager();
+
+    //configure the cache
+    String cacheName = "sampleCache3";
+    MutableConfiguration config = new MutableConfiguration<String, Integer>();
+    config.setStoreByValue(false)
+        .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
+        .setStatisticsEnabled(true);
+
+    //create the cache
+    cacheManager.createCache(cacheName, config);
+
+    //get the cache
+    Cache<String, Integer> cache = cacheManager.getCache(cacheName);
+
+    //use the cache
+    String key = "key";
+    Integer value1 = 1;
+    cache.put("key", value1);
+    //The following line gives a compile error
+    //cache.put(value1, "key1");
+    Integer value2 = (Integer) cache.get(key);
+
+    cache.remove("key");
+    assertNull(cache.get("key"));
+  }
+
+
+  @Test
+  public void simpleAPINoGenericsAndNoTypeEnforcement() {
 
     //resolve a cache manager
     CachingProvider cachingProvider = Caching.getCachingProvider();
