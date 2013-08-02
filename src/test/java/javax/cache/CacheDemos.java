@@ -18,7 +18,7 @@ public class CacheDemos {
 
 
   @Test
-  public void simpleAPI() {
+  public void simpleAPITypeEnforcement() {
     CachingProvider cachingProvider = Caching.getCachingProvider();
     CacheManager cacheManager = cachingProvider.getCacheManager();
 
@@ -41,8 +41,40 @@ public class CacheDemos {
     assertNull(cache.get("key"));
   }
 
+
   @Test
-  public void simpleAPINoGenerics() {
+  public void simpleAPITypeEnforcementUsingCaching() {
+
+    //resolve a cache manager
+    CachingProvider cachingProvider = Caching.getCachingProvider();
+    CacheManager cacheManager = cachingProvider.getCacheManager();
+
+    //configure the cache
+    MutableConfiguration<String, Integer> config = new MutableConfiguration<String, Integer>();
+    config.setStoreByValue(false)
+        .setTypes(String.class, Integer.class)
+        .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
+        .setStatisticsEnabled(true);
+
+    //create the cache
+    cacheManager.createCache("simpleCache", config);
+
+    //get the cache
+    Cache<String, Integer> cache = Caching.getCache("simpleCache",
+        String.class, Integer.class);
+
+    //cache operations
+    String key = "key";
+    Integer value1 = 1;
+    cache.put("key", value1);
+    Integer value2 = cache.get(key);
+    assertEquals(value1, value2);
+    cache.remove("key");
+    assertNull(cache.get("key"));
+  }
+
+  @Test
+  public void simpleAPINoTypeEnforcement() {
     String cacheName = "sampleCache";
     CachingProvider cachingProvider = Caching.getCachingProvider();
     CacheManager cacheManager = cachingProvider.getCacheManager();
