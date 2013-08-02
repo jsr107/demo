@@ -57,10 +57,10 @@ public class CacheDemos {
         .setStatisticsEnabled(true);
 
     //create the cache
-    cacheManager.createCache("simpleCache", config);
+    cacheManager.createCache("simpleCache2", config);
 
     //get the cache
-    Cache<String, Integer> cache = Caching.getCache("simpleCache",
+    Cache<String, Integer> cache = Caching.getCache("simpleCache2",
         String.class, Integer.class);
 
     //cache operations
