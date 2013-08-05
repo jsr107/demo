@@ -109,8 +109,8 @@ public class CacheDemos {
     //cache.put(value1, "key1");
     Integer value2 = (Integer) cache.get(key);
 
-    cache.remove("key");
-    assertNull(cache.get("key"));
+    cache.remove(key);
+    assertNull(cache.get(key));
   }
 
 
@@ -137,14 +137,14 @@ public class CacheDemos {
     //use the cache
     String key = "key";
     Integer value1 = 1;
-    cache.put("key", value1);
+    cache.put(key, value1);
     //wrong
-    cache.put(value1, "key1");
+    cache.put(value1, key);
     Integer value2 = (Integer) cache.get(key);
     assertEquals(value1, value2);
 
-    cache.remove("key");
-    assertNull(cache.get("key"));
+    cache.remove(key);
+    assertNull(cache.get(key));
   }
 
 
