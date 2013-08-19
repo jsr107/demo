@@ -148,4 +148,40 @@ public class CacheDemos {
   }
 
 
+    /**
+     * Shows the consequences of using Object, Object where you want no enforcement
+     */
+    @Test
+    public void simpleAPITypeEnforcementObject() {
+
+        //resolve a cache manager
+        CachingProvider cachingProvider = Caching.getCachingProvider();
+        CacheManager cacheManager = cachingProvider.getCacheManager();
+
+        //configure the cache
+        MutableConfiguration<Object, Object> config = new MutableConfiguration<Object, Object>();
+        config.setStoreByValue(false)
+                .setTypes(Object.class, Object.class)
+                .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
+                .setStatisticsEnabled(true);
+
+        //create the cache
+        cacheManager.createCache("simpleCache", config);
+
+        //get the cache
+        Cache<Object, Object> cache = Caching.getCache("simpleCache",
+                Object.class, Object.class);
+
+        //use the cache
+        String key = "key";
+        Integer value1 = 1;
+        cache.put("key", value1);
+        Object value2 = cache.get(key);
+        assertEquals(value1, value2);
+
+        cache.remove("key");
+        assertNull(cache.get("key"));
+    }
+
+
 }
