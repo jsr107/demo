@@ -166,10 +166,10 @@ public class CacheDemos {
                 .setStatisticsEnabled(true);
 
         //create the cache
-        cacheManager.createCache("simpleCache", config);
+        cacheManager.createCache("simpleCache4", config);
 
         //get the cache
-        Cache<Object, Object> cache = Caching.getCache("simpleCache",
+        Cache<Object, Object> cache = Caching.getCache("simpleCache4",
                 Object.class, Object.class);
 
         //use the cache

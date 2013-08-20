@@ -18,8 +18,8 @@ public class TypeSafety {
     MutableConfiguration<String, Integer> config = new
         MutableConfiguration<String, Integer>();
     config.setTypes(String.class, Integer.class);
-    cacheManager.createCache("simpleCache", config);
-    Cache<String, Integer> simpleCache = cacheManager.getCache("simpleCache",
+    cacheManager.createCache("simpleCache5", config);
+    Cache<String, Integer> simpleCache = cacheManager.getCache("simpleCache5",
         String.class, Integer.class);
 
     simpleCache.put("key1", 3);
