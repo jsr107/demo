@@ -1,5 +1,7 @@
 package javax.cache;
 
+import org.junit.Test;
+
 import javax.cache.configuration.MutableConfiguration;
 import javax.cache.spi.CachingProvider;
 
@@ -8,6 +10,7 @@ import javax.cache.spi.CachingProvider;
  */
 public class TypeSafety {
 
+  @Test
   public void runtimeTypeEnforcement() {
     CachingProvider cachingProvider = Caching.getCachingProvider();
     CacheManager cacheManager = cachingProvider.getCacheManager();
@@ -21,6 +24,11 @@ public class TypeSafety {
 
     simpleCache.put("key1", 3);
     Integer value2 = simpleCache.get("key1");
+
+    //Shows how to get around runtime+generics safety
+    Cache secondReferenceToCache = simpleCache;
+    secondReferenceToCache.put(123, "String");
+
   }
 
 
