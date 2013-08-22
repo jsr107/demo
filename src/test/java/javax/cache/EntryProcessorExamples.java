@@ -3,11 +3,13 @@ package javax.cache;
 import org.junit.Test;
 
 import javax.cache.configuration.MutableConfiguration;
+import javax.cache.processor.MutableEntry;
 import javax.cache.spi.CachingProvider;
 import java.io.Serializable;
+import javax.cache.processor.EntryProcessor;
 
 /**
- * {@link Cache.EntryProcessor} examples.
+ * {@link EntryProcessor} examples.
  *
  * @author Brian Oliver
  */
@@ -15,7 +17,7 @@ public class EntryProcessorExamples {
 
   /**
    * Demonstrates incrementing a value in a {@link Cache} using
-   * an {@link Cache.EntryProcessor}.
+   * an {@link EntryProcessor}.
    */
   @Test
   public void incrementValue() {
@@ -41,12 +43,12 @@ public class EntryProcessorExamples {
   }
 
   /**
-   * An {@link Cache.EntryProcessor} that increments an {@link Integer}.
+   * An {@link EntryProcessor} that increments an {@link Integer}.
    *
    * @param <K> the type of keys
    */
   public static class IncrementProcessor<K>
-      implements Cache.EntryProcessor<K, Integer, Integer>, Serializable {
+      implements EntryProcessor<K, Integer, Integer>, Serializable {
 
     /**
      * The serialVersionUID required for {@link java.io.Serializable}.
@@ -57,7 +59,7 @@ public class EntryProcessorExamples {
      * {@inheritDoc}
      */
     @Override
-    public Integer process(Cache.MutableEntry<K, Integer> entry, Object... arguments) {
+    public Integer process(MutableEntry<K, Integer> entry, Object... arguments) {
       if (entry.exists()) {
         Integer current = entry.getValue();
         entry.setValue(current + 1);
