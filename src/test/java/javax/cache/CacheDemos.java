@@ -25,7 +25,7 @@ public class CacheDemos {
     CacheManager cacheManager = cachingProvider.getCacheManager();
 
     //configure the cache
-    MutableConfiguration<String, Integer> config = new MutableConfiguration<String, Integer>();
+    MutableConfiguration<String, Integer> config = new MutableConfiguration<>();
     config.setStoreByValue(false)
         .setTypes(String.class, Integer.class)
         .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
@@ -34,7 +34,7 @@ public class CacheDemos {
     //create the cache
     cacheManager.createCache("simpleCache", config);
 
-    //get the cache
+    //... and then later to get the cache
     Cache<String, Integer> cache = Caching.getCache("simpleCache",
         String.class, Integer.class);
 
@@ -58,7 +58,7 @@ public class CacheDemos {
     CacheManager cacheManager = cachingProvider.getCacheManager();
 
     //configure the cache
-    MutableConfiguration<String, Integer> config = new MutableConfiguration<String, Integer>();
+    MutableConfiguration<String, Integer> config = new MutableConfiguration<>();
     config.setStoreByValue(false)
         .setTypes(String.class, Integer.class)
         .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
@@ -67,7 +67,7 @@ public class CacheDemos {
     //create the cache
     cacheManager.createCache("simpleCache2", config);
 
-    //get the cache
+    //... and then later to get the cache
     Cache<String, Integer> cache = Caching.getCache("simpleCache2",
         String.class, Integer.class);
 
@@ -98,13 +98,14 @@ public class CacheDemos {
     //create the cache
     cacheManager.createCache(cacheName, config);
 
-    //get the cache
+    //... and then later to get the cache
     Cache<String, Integer> cache = cacheManager.getCache(cacheName);
 
     //use the cache
     String key = "key";
     Integer value1 = 1;
     cache.put("key", value1);
+
     //The following line gives a compile error
     //cache.put(value1, "key1");
     Integer value2 = (Integer) cache.get(key);
@@ -123,7 +124,7 @@ public class CacheDemos {
 
     //configure the cache
     String cacheName = "sampleCache";
-    MutableConfiguration config = new MutableConfiguration<String, Integer>();
+    MutableConfiguration config = new MutableConfiguration();
     config.setStoreByValue(false)
         .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
     .setStatisticsEnabled(true);
@@ -131,7 +132,7 @@ public class CacheDemos {
     //create the cache
     cacheManager.createCache(cacheName, config);
 
-    //get the cache
+    //... and then later to get the cache
     Cache cache = cacheManager.getCache(cacheName);
 
     //use the cache
@@ -159,7 +160,7 @@ public class CacheDemos {
         CacheManager cacheManager = cachingProvider.getCacheManager();
 
         //configure the cache
-        MutableConfiguration<Object, Object> config = new MutableConfiguration<Object, Object>();
+        MutableConfiguration<Object, Object> config = new MutableConfiguration<>();
         config.setStoreByValue(false)
                 .setTypes(Object.class, Object.class)
                 .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
@@ -168,7 +169,7 @@ public class CacheDemos {
         //create the cache
         cacheManager.createCache("simpleCache4", config);
 
-        //get the cache
+        //... and then later to get the cache
         Cache<Object, Object> cache = Caching.getCache("simpleCache4",
                 Object.class, Object.class);
 

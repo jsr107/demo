@@ -21,7 +21,7 @@ public class CompletionListenerExamples {
     CachingProvider cachingProvider = Caching.getCachingProvider();
     CacheManager cacheManager = cachingProvider.getCacheManager();
 
-    MutableConfiguration<String, Integer> config = new MutableConfiguration<String, Integer>();
+    MutableConfiguration<String, Integer> config = new MutableConfiguration<>();
     config.setStoreByValue(false)
         .setTypes(String.class, Integer.class)
         .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))

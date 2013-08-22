@@ -16,8 +16,9 @@ public class TypeSafety {
     CacheManager cacheManager = cachingProvider.getCacheManager();
 
     MutableConfiguration<String, Integer> config = new
-        MutableConfiguration<String, Integer>();
+        MutableConfiguration<>();
     config.setTypes(String.class, Integer.class);
+
     Cache<String, Integer> simpleCache =  cacheManager.createCache("simpleCache5", config);
 
     simpleCache.put("key1", 3);
