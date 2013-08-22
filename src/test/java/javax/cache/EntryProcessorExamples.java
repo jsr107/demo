@@ -47,8 +47,8 @@ public class EntryProcessorExamples {
    *
    * @param <K> the type of keys
    */
-  public static class IncrementProcessor<K>
-      implements EntryProcessor<K, Integer, Integer>, Serializable {
+  public static class IncrementProcessor<K> extends EntryProcessor<K, Integer, Integer>
+      implements Serializable {
 
     /**
      * The serialVersionUID required for {@link java.io.Serializable}.
