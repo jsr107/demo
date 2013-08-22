@@ -31,9 +31,7 @@ public class StatisticsExample {
         .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
         .setStatisticsEnabled(true);
 
-    cacheManager.createCache("simpleCache", config);
-    Cache<String, Integer> cache = cacheManager.getCache("simpleCache",
-        String.class, Integer.class);
+    Cache<String, Integer> cache = cacheManager.createCache("simpleCache", config);
 
     Set<ObjectName> registeredObjectNames = null;
     MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
