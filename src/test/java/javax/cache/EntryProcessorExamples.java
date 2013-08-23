@@ -3,10 +3,10 @@ package javax.cache;
 import org.junit.Test;
 
 import javax.cache.configuration.MutableConfiguration;
+import javax.cache.processor.EntryProcessor;
 import javax.cache.processor.MutableEntry;
 import javax.cache.spi.CachingProvider;
 import java.io.Serializable;
-import javax.cache.processor.EntryProcessor;
 
 /**
  * {@link EntryProcessor} examples.
