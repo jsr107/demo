@@ -27,18 +27,18 @@ public class Expiry {
     }
 
     @Override
-    public <L extends String> Duration getExpiryForCreatedEntry(L key) {
+    public Duration getExpiryForCreatedEntry(String key) {
       return TWENTY_MINUTES;
     }
 
     @Override
-    public <L extends String> Duration getExpiryForAccessedEntry(L key) {
+    public Duration getExpiryForAccessedEntry(String key) {
       //we don't change the expiry time for accesses
       return null;
     }
 
     @Override
-    public <L extends String> Duration getExpiryForModifiedEntry(L key) {
+    public Duration getExpiryForModifiedEntry(String key) {
       Expiry.ShoppingCart cart = cache.get(key);
 
 
