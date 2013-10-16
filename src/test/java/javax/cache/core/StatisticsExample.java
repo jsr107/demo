@@ -1,5 +1,8 @@
-package javax.cache;
+package javax.cache.core;
 
+import javax.cache.Cache;
+import javax.cache.CacheManager;
+import javax.cache.Caching;
 import javax.cache.configuration.MutableConfiguration;
 import javax.cache.expiry.AccessedExpiryPolicy;
 import javax.cache.spi.CachingProvider;
@@ -26,8 +29,7 @@ public class StatisticsExample {
 
     MutableConfiguration<String, Integer> config =
         new MutableConfiguration<String, Integer>();
-    config.setStoreByValue(false)
-        .setTypes(String.class, Integer.class)
+    config.setTypes(String.class, Integer.class)
         .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
         .setStatisticsEnabled(true);
 

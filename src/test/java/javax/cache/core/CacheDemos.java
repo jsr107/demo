@@ -1,7 +1,10 @@
-package javax.cache;
+package javax.cache.core;
 
 import org.junit.Test;
 
+import javax.cache.Cache;
+import javax.cache.CacheManager;
+import javax.cache.Caching;
 import javax.cache.configuration.MutableConfiguration;
 import javax.cache.expiry.AccessedExpiryPolicy;
 import javax.cache.spi.CachingProvider;
@@ -12,6 +15,7 @@ import static org.junit.Assert.assertEquals;
 
 
 /**
+ *
  * @author Greg Luck
  */
 public class CacheDemos {
@@ -26,7 +30,7 @@ public class CacheDemos {
 
     //configure the cache
     MutableConfiguration<String, Integer> config = new MutableConfiguration<>();
-    config.setStoreByValue(false)
+    config.setStoreByValue(true)
         .setTypes(String.class, Integer.class)
         .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
         .setStatisticsEnabled(true);
@@ -59,8 +63,7 @@ public class CacheDemos {
 
     //configure the cache
     MutableConfiguration<String, Integer> config = new MutableConfiguration<>();
-    config.setStoreByValue(false)
-        .setTypes(String.class, Integer.class)
+    config.setTypes(String.class, Integer.class)
         .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
         .setStatisticsEnabled(true);
 
@@ -91,8 +94,7 @@ public class CacheDemos {
     //configure the cache
     String cacheName = "sampleCache3";
     MutableConfiguration config = new MutableConfiguration<String, Integer>();
-    config.setStoreByValue(false)
-        .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
+    config.setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
         .setStatisticsEnabled(true);
 
     //create the cache
@@ -125,8 +127,7 @@ public class CacheDemos {
     //configure the cache
     String cacheName = "sampleCache";
     MutableConfiguration config = new MutableConfiguration();
-    config.setStoreByValue(false)
-        .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
+    config.setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
     .setStatisticsEnabled(true);
 
     //create the cache
@@ -161,8 +162,7 @@ public class CacheDemos {
 
         //configure the cache
         MutableConfiguration<Object, Object> config = new MutableConfiguration<>();
-        config.setStoreByValue(false)
-                .setTypes(Object.class, Object.class)
+        config.setTypes(Object.class, Object.class)
                 .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
                 .setStatisticsEnabled(true);
 

@@ -1,7 +1,10 @@
-package javax.cache;
+package javax.cache.core;
 
 import org.junit.Test;
 
+import javax.cache.Cache;
+import javax.cache.CacheManager;
+import javax.cache.Caching;
 import javax.cache.configuration.MutableConfiguration;
 import javax.cache.processor.EntryProcessor;
 import javax.cache.processor.MutableEntry;
@@ -16,7 +19,7 @@ import java.io.Serializable;
 public class EntryProcessorExamples {
 
   /**
-   * Demonstrates incrementing a value in a {@link Cache} using
+   * Demonstrates incrementing a value in a {@link javax.cache.Cache} using
    * an {@link EntryProcessor}.
    */
   @Test
