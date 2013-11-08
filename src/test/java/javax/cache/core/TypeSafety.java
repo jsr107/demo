@@ -22,16 +22,19 @@ public class TypeSafety {
         MutableConfiguration<>();
     config.setTypes(String.class, Integer.class);
 
-    Cache<String, Integer> simpleCache =  cacheManager.createCache("simpleCache5", config);
+    Cache<String, Integer> simpleCache = cacheManager.createCache("simpleCache5", config);
 
     simpleCache.put("key1", 3);
     Integer value2 = simpleCache.get("key1");
 
-    //Shows how to get around runtime+generics safety
+    //Shows how you might try to get around runtime+generics safety
     Cache secondReferenceToCache = simpleCache;
-    secondReferenceToCache.put(123, "String");
 
+    try {
+      secondReferenceToCache.put(123, "String");
+    } catch (ClassCastException e) {
+      //But the RI is an implementation that performs runtime enforcement and throws
+      //a ClassCastException. Implementations may perform runtime enforcement.
+    }
   }
-
-
 }
