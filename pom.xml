@@ -35,12 +35,6 @@
             <version>1.0.1-SNAPSHOT</version>
         </dependency>
 
-        <!--<dependency>-->
-        <!--<groupId>net.sf.ehcache</groupId>-->
-        <!--<artifactId>ehcache-jcache</artifactId>-->
-        <!--<version>1.5.0-0.5</version>-->
-        <!--</dependency>-->
-
 
     </dependencies>
 
@@ -50,12 +44,12 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.9</version>
-                    <configuration>
-                        <includes>
-                            <include>**/**.java</include>
-                        </includes>
-                    </configuration>
-                    <!--<skipTests>true</skipTests>-->
+                <configuration>
+                    <includes>
+                        <include>**/**.java</include>
+                    </includes>
+                </configuration>
+                <!--<skipTests>true</skipTests>-->
             </plugin>
 
             <plugin>
@@ -100,6 +94,36 @@
                     <cloverDatabase>${java.io.tmpdir}/clover/clover.db
                     </cloverDatabase>
                     <singleCloverDatabase>true</singleCloverDatabase>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.10</version>
+                <!--<inherited>true</inherited>-->
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>checkstyle</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <configLocation>${basedir}/checkstyle/checkstyle.xml
+                    </configLocation>
+                    <suppressionsLocation>${basedir}/checkstyle/suppressions.xml
+                    </suppressionsLocation>
+                    <headerLocation>${basedir}/checkstyle/ClassHeader.txt
+                    </headerLocation>
+                    <enableRSS>false</enableRSS>
+                    <linkXRef>true</linkXRef>
+                    <consoleOutput>true</consoleOutput>
+                    <failsOnError>true</failsOnError>
+                    <failOnViolation>true</failOnViolation>
+                    <includeTestSourceDirectory>false</includeTestSourceDirectory>
+                    <enableRulesSummary>true</enableRulesSummary>
                 </configuration>
             </plugin>
 

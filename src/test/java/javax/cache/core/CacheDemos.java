@@ -5,6 +5,7 @@ import org.junit.Test;
 import javax.cache.Cache;
 import javax.cache.CacheManager;
 import javax.cache.Caching;
+import javax.cache.configuration.Configuration;
 import javax.cache.configuration.MutableConfiguration;
 import javax.cache.expiry.AccessedExpiryPolicy;
 import javax.cache.spi.CachingProvider;
@@ -15,7 +16,6 @@ import static org.junit.Assert.assertEquals;
 
 
 /**
- *
  * @author Greg Luck
  */
 public class CacheDemos {
@@ -24,140 +24,144 @@ public class CacheDemos {
     @Test
     public void simpleCache() {
 
-        Cache<Integer, String> simpleCache = Caching.getCache("simpleCache", Integer.class, String.class);
+        CacheManager manager = Caching.getCachingProvider().getCacheManager();
+        Configuration<Integer, String> configuration = new MutableConfiguration<Integer, String>().setTypes(Integer.class, String.class);
+        Cache<Integer, String> simpleCache = manager.getCache("simpleCache22");
+        simpleCache = manager.createCache("simpleCache22", configuration);
         simpleCache.put(2, "value");
         String value = simpleCache.get(2);
+        System.out.println("Value: " + value);
     }
 
 
-  @Test
-  public void simpleAPITypeEnforcement() {
+    @Test
+    public void simpleAPITypeEnforcement() {
 
-    //resolve a cache manager
-    CachingProvider cachingProvider = Caching.getCachingProvider();
-    CacheManager cacheManager = cachingProvider.getCacheManager();
+        //resolve a cache manager
+        CachingProvider cachingProvider = Caching.getCachingProvider();
+        CacheManager cacheManager = cachingProvider.getCacheManager();
 
-    //configure the cache
-    MutableConfiguration<String, Integer> config = new MutableConfiguration<>();
-    config.setStoreByValue(true)
-        .setTypes(String.class, Integer.class)
-        .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
-        .setStatisticsEnabled(true);
+        //configure the cache
+        MutableConfiguration<String, Integer> config = new MutableConfiguration<>();
+        config.setStoreByValue(true)
+                .setTypes(String.class, Integer.class)
+                .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
+                .setStatisticsEnabled(true);
 
-    //create the cache
-    cacheManager.createCache("simpleCache", config);
+        //create the cache
+        cacheManager.createCache("simpleCache", config);
 
-    //... and then later to get the cache
-    Cache<String, Integer> cache = Caching.getCache("simpleCache", String.class, Integer.class);
+        //... and then later to get the cache
+        Cache<String, Integer> cache = Caching.getCache("simpleCache", String.class, Integer.class);
 
-    //use the cache
-    String key = "key";
-    Integer value1 = 1;
-    cache.put("key", value1);
-    Integer value2 = cache.get(key);
-    assertEquals(value1, value2);
+        //use the cache
+        String key = "key";
+        Integer value1 = 1;
+        cache.put("key", value1);
+        Integer value2 = cache.get(key);
+        assertEquals(value1, value2);
 
-    cache.remove("key");
-    assertNull(cache.get("key"));
-  }
-
-
-  @Test
-  public void simpleAPITypeEnforcementUsingCaching() {
-
-    //resolve a cache manager
-    CachingProvider cachingProvider = Caching.getCachingProvider();
-    CacheManager cacheManager = cachingProvider.getCacheManager();
-
-    Number one = new Integer(1);
-
-    //configure the cache
-    MutableConfiguration<String, Integer> config = new MutableConfiguration<>();
-    config.setTypes(String.class, Integer.class)
-        .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
-        .setStatisticsEnabled(true);
-
-    //create the cache
-    cacheManager.createCache("simpleCache2", config);
-
-    //... and then later to get the cache
-    Cache<String, Integer> cache = Caching.getCache("simpleCache2",
-        String.class, Integer.class);
-
-    //use the cache
-    String key = "key";
-    Integer value1 = 1;
-    cache.put("key", value1);
-    Integer value2 = cache.get(key);
-    assertEquals(value1, value2);
-    cache.remove("key");
-    assertNull(cache.get("key"));
-  }
-
-  @Test
-  public void simpleAPIWithGenericsAndNoTypeEnforcement() {
-
-    //resolve a cache manager
-    CachingProvider cachingProvider = Caching.getCachingProvider();
-    CacheManager cacheManager = cachingProvider.getCacheManager();
-
-    //configure the cache
-    String cacheName = "sampleCache3";
-    MutableConfiguration config = new MutableConfiguration<String, Integer>();
-    config.setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
-        .setStatisticsEnabled(true);
-
-    //create the cache
-    cacheManager.createCache(cacheName, config);
-
-    //... and then later to get the cache
-    Cache<String, Integer> cache = cacheManager.getCache(cacheName);
-
-    //use the cache
-    String key = "key";
-    Integer value1 = 1;
-    cache.put("key", value1);
-
-    //The following line gives a compile error
-    //cache.put(value1, "key1");
-    Integer value2 = (Integer) cache.get(key);
-
-    cache.remove(key);
-    assertNull(cache.get(key));
-  }
+        cache.remove("key");
+        assertNull(cache.get("key"));
+    }
 
 
-  @Test
-  public void simpleAPINoGenericsAndNoTypeEnforcement() {
+    @Test
+    public void simpleAPITypeEnforcementUsingCaching() {
 
-    //resolve a cache manager
-    CachingProvider cachingProvider = Caching.getCachingProvider();
-    CacheManager cacheManager = cachingProvider.getCacheManager();
+        //resolve a cache manager
+        CachingProvider cachingProvider = Caching.getCachingProvider();
+        CacheManager cacheManager = cachingProvider.getCacheManager();
 
-    //configure the cache
-    String cacheName = "sampleCache";
-    MutableConfiguration config = new MutableConfiguration();
-    config.setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
-    .setStatisticsEnabled(true);
+        Number one = new Integer(1);
 
-    //create the cache
-    cacheManager.createCache(cacheName, config);
+        //configure the cache
+        MutableConfiguration<String, Integer> config = new MutableConfiguration<>();
+        config.setTypes(String.class, Integer.class)
+                .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
+                .setStatisticsEnabled(true);
 
-    //... and then later to get the cache
-    Cache cache = cacheManager.getCache(cacheName);
+        //create the cache
+        cacheManager.createCache("simpleCache2", config);
 
-    //use the cache
-    String key = "key";
-    Integer value1 = 1;
-    cache.put(key, value1);
-    //wrong
-    cache.put(value1, key);
-    Integer value2 = (Integer) cache.get(key);
-    assertEquals(value1, value2);
+        //... and then later to get the cache
+        Cache<String, Integer> cache = Caching.getCache("simpleCache2",
+                String.class, Integer.class);
 
-    cache.remove(key);
-    assertNull(cache.get(key));
-  }
+        //use the cache
+        String key = "key";
+        Integer value1 = 1;
+        cache.put("key", value1);
+        Integer value2 = cache.get(key);
+        assertEquals(value1, value2);
+        cache.remove("key");
+        assertNull(cache.get("key"));
+    }
+
+    @Test
+    public void simpleAPIWithGenericsAndNoTypeEnforcement() {
+
+        //resolve a cache manager
+        CachingProvider cachingProvider = Caching.getCachingProvider();
+        CacheManager cacheManager = cachingProvider.getCacheManager();
+
+        //configure the cache
+        String cacheName = "sampleCache3";
+        MutableConfiguration config = new MutableConfiguration<String, Integer>();
+        config.setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
+                .setStatisticsEnabled(true);
+
+        //create the cache
+        cacheManager.createCache(cacheName, config);
+
+        //... and then later to get the cache
+        Cache<String, Integer> cache = cacheManager.getCache(cacheName);
+
+        //use the cache
+        String key = "key";
+        Integer value1 = 1;
+        cache.put("key", value1);
+
+        //The following line gives a compile error
+        //cache.put(value1, "key1");
+        Integer value2 = (Integer) cache.get(key);
+
+        cache.remove(key);
+        assertNull(cache.get(key));
+    }
+
+
+    @Test
+    public void simpleAPINoGenericsAndNoTypeEnforcement() {
+
+        //resolve a cache manager
+        CachingProvider cachingProvider = Caching.getCachingProvider();
+        CacheManager cacheManager = cachingProvider.getCacheManager();
+
+        //configure the cache
+        String cacheName = "sampleCache";
+        MutableConfiguration config = new MutableConfiguration();
+        config.setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
+                .setStatisticsEnabled(true);
+
+        //create the cache
+        cacheManager.createCache(cacheName, config);
+
+        //... and then later to get the cache
+        Cache cache = cacheManager.getCache(cacheName);
+
+        //use the cache
+        String key = "key";
+        Integer value1 = 1;
+        cache.put(key, value1);
+        //wrong
+        cache.put(value1, key);
+        Integer value2 = (Integer) cache.get(key);
+        assertEquals(value1, value2);
+
+        cache.remove(key);
+        assertNull(cache.get(key));
+    }
 
 
     /**
