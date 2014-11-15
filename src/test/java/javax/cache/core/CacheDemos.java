@@ -21,6 +21,15 @@ import static org.junit.Assert.assertEquals;
 public class CacheDemos {
 
 
+    @Test
+    public void simpleCache() {
+
+        Cache<Integer, String> simpleCache = Caching.getCache("simpleCache", Integer.class, String.class);
+        simpleCache.put(2, "value");
+        String value = simpleCache.get(2);
+    }
+
+
   @Test
   public void simpleAPITypeEnforcement() {
 
@@ -39,8 +48,7 @@ public class CacheDemos {
     cacheManager.createCache("simpleCache", config);
 
     //... and then later to get the cache
-    Cache<String, Integer> cache = Caching.getCache("simpleCache",
-        String.class, Integer.class);
+    Cache<String, Integer> cache = Caching.getCache("simpleCache", String.class, Integer.class);
 
     //use the cache
     String key = "key";
@@ -60,6 +68,8 @@ public class CacheDemos {
     //resolve a cache manager
     CachingProvider cachingProvider = Caching.getCachingProvider();
     CacheManager cacheManager = cachingProvider.getCacheManager();
+
+    Number one = new Integer(1);
 
     //configure the cache
     MutableConfiguration<String, Integer> config = new MutableConfiguration<>();
