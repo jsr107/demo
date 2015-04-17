@@ -56,7 +56,7 @@ public class StatisticsExample {
         .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(ONE_HOUR))
         .setStatisticsEnabled(true);
 
-    Cache<String, Integer> cache = cacheManager.createCache("simpleCache", config);
+    Cache<String, Integer> cache = cacheManager.createCache("simpleCacheWithStatistics", config);
 
     // defining constants.
     long cacheHits = 5;
