@@ -6,9 +6,9 @@
  */
 
 /**
- * <p/>
+ * <p>
  * This package contains sample code for javax.cache set up as JUnit tests.
- * <p/>
+ * </p>
  * It uses required and optional features of the specification.
  *
  * @author Greg Luck
